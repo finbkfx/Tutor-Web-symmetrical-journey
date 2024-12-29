@@ -1,24 +1,66 @@
+/* Basic styling for body and layout */
 body {
   font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
-header {
+h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Chat box styling */
+#chat {
+  width: 80%;
+  max-width: 600px;
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#chat div {
+  margin: 5px 0;
+  padding: 5px;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+/* Mic button styling */
+#micButton {
+  padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
-  text-align: center;
-  padding: 1em 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
-main {
-  padding: 2em;
+#micButton.stop {
+  background-color: #f44336;
 }
 
-footer {
-  text-align: center;
-  margin-top:2 em;
-  font-size: 0.9em;
-  color: gray;
+/* Display the result of speech */
+#result {
+  width: 80%;
+  max-width: 600px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
