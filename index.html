@@ -1,44 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-</head>
-  <meta charset="UTF-8">
-  <meta name="viewport", content="width=device, initial-scale=1.0">
-  <title>Milan's Tutoring Services</title>
-  <link> real="stylessheet"
-href="styles.css">
-href="audio/index.html">Audio Page</a>
-  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech-to-Text with WebRTC</title>
+    <style>
+        /* Style your page here */
+    </style>
 </head>
 <body>
-  <header>
-   
+    <h1>Speech-to-Text with Mic Lock</h1>
+    <button id="micButton" onclick="toggleMic()">Start Listening</button>
+    <div id="result">Speak something...</div>
 
-    <h1>Welcome to Milan's Tutoring Services</h1>
-    <p>Learn English, prepare for IELTS, and more!<p>
-    </header>
-    <main>
-      <section>
-        <h2> What I offer<h2>
-        <ul>
-          <li>English lessons for all levels</li>
-          <li>IELTS preparation</li>
-          <li>Translation services</li>
-          <li>Python and other computer languages programming</li>
-          <li> TutorWeb! Learn and grow, make positive change in The World.<li?
-          <li>Learn Programming. 😍<li>
-          </li>It is easy-peasy! Let's Have Fun!<li>
-          </li>Leran English in a most effective way, as well as programming and anything else. I will help you! 🎉<li>
-            
-          </li>The Future, think about it. What will Your Future look like? 😉✔<li>
-            
-          </li>contact info: mmitic@outlook.com<li>
-            
-          </li>patreon.com/MilanMitic<li>
-          </ul>
-      </section>
-      <footer>
-        <p>Contact me: mmitic78@outlook.com</p>
-      </footer>
-     </main>
- </body>
- </html>
+    <script>
+        // JavaScript code here
+
+        let recognition;
+        let isListening = false;
+        let accumulatedText = '';  // Variable to store all recognized text
+
+        function toggleMic() {
+            if (!isListening) {
+                startListening();
+                document.getElementById("micButton").textContent = "Stop Listening";
+                document.getElementById("micButton").classList.add("stop");
+            } else {
+                stopListening();
+                document.getElementById("micButton").textContent = "Start Listening";
+                document.getElementById("micButton").classList.remove("stop");
+            }
+            isListening = !isListening;
+        }
+
+        function startListening() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+                recognition.lang = 'en-US';  // Set the language
+                recognition.continuous = true;  // Keep listening until stopped
+                recognition.interimResults = true;  // Show interim results (while speaking)
+
+                recognition.onstart = function() {
+                    console.log("Microphone is active. Listening...");
+                };
+
+                recognition.onresult = function(event) {
+                    let speechToText = event.results[event.results.length - 1][0].transcript;
+                    accumulatedText += speechToText + '\n';  // Append recognized speech to accumulated text
+                    document.getElementById("result").textContent = accumulatedText;  // Display all text
+                    console.log("Recognized Speech: " + speechToText);
+                };
+
+                recognition.onerror = function(event) {
+                    console.log("Error occurred in speech recognition: " + event.error);
+                };
+
+                recognition.onend = function() {
+                    console.log("Listening ended. Restart the microphone.");
+                    if (isListening) {
+                        startListening();
+                    }
+                };
+
+                recognition.start();
+            } else {
+                console.log("Your browser does not support Speech Recognition.");
+            }
+        }
+
+        function stopListening() {
+            if (recognition) {
+                recognition.stop();  // Stop listening
+            }
+        }
+    </script>
+</body>
+</html>
