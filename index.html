@@ -3,78 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutor-Web-symmetrical-journey</title>
+    <title>Tutor-Web Symmetrical Journey</title>
     <style>
-        /* Style your page here */
-    </style>
-</head>
-<body>
-    <h1>Tutor-web</h1>
-    <button id="micButton" onclick="toggleMic()">Start Listening</button>
-    <div id="result">Speak something...</div>
-
-    <iframe src="README.md" style="width:100%; height:400px;"></iframe>
-
-    <script>
-        // JavaScript code here
-
-        let recognition;
-        let isListening = false;
-        let accumulatedText = '';  // Variable to store all recognized text
-
-        function toggleMic() {
-            if (!isListening) {
-                startListening();
-                document.getElementById("micButton").textContent = "Stop Listening";
-                document.getElementById("micButton").classList.add("stop");
-            } else {
-                stopListening();
-                document.getElementById("micButton").textContent = "Start Listening";
-                document.getElementById("micButton").classList.remove("stop");
-            }
-            isListening = !isListening;
+        /* Basic styling for body and layout */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Gradient background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            color: #333;
         }
 
-        function startListening() {
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-                recognition.lang = 'en-US';  // Set the language
-                recognition.continuous = true;  // Keep listening until stopped
-                recognition.interimResults = true;  // Show interim results (while speaking)
-
-                recognition.onstart = function() {
-                    console.log("Microphone is active. Listening...");
-                };
-
-                recognition.onresult = function(event) {
-                    let speechToText = event.results[event.results.length - 1][0].transcript;
-                    accumulatedText += speechToText + '\n';  // Append recognized speech to accumulated text
-                    document.getElementById("result").textContent = accumulatedText;  // Display all text
-                    console.log("Recognized Speech: " + speechToText);
-                };
-
-                recognition.onerror = function(event) {
-                    console.log("Error occurred in speech recognition: " + event.error);
-                };
-
-                recognition.onend = function() {
-                    console.log("Listening ended. Restart the microphone.");
-                    if (isListening) {
-                        startListening();
-                    }
-                };
-
-                recognition.start();
-            } else {
-                console.log("Your browser does not support Speech Recognition.");
-            }
+        /* Center container for layout */
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            background: #ffffff; /* White background for container */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
         }
 
-        function stopListening() {
-            if (recognition) {
-                recognition.stop();  // Stop listening
-            }
+        /* Title styling with color */
+        .title {
+            font-size: 2.5rem;
+            color: #4A90E2; /* Bright blue color */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Soft text shadow */
         }
-    </script>
-</body>
-</html>
+
+        /* Mic button styling with hover effect */
+        #micButton {
+            padding: 15px 25px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        #micButton:hover {
+            background-color: #45a049; /* Darker green */
+        }
+
+        #micButton.stop {
+            background-color: #f44336; /* Red for stop */
+        }
+
+        #micButton.stop:hover {
+            background-color: #d32f2f; /* Darker red */
+        }
+
+        /* Display the result of speech */
+        #result {
+            width: 90%;
+            max-width: 600px;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffffff; /* White box */
+            border: 2px solid #4A90E2; /* Blue border */
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #333;
+            font-size: 1rem;
+            box-shadow: 0 2px
