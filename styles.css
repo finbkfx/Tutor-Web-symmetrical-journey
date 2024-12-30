@@ -1,66 +1,79 @@
 /* Basic styling for body and layout */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5); /* Gradient background */
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
-}
-
-h1 {
-  font-size: 2rem;
   color: #333;
 }
 
-/* Chat box styling */
-#chat {
-  width: 80%;
-  max-width: 600px;
-  height: 300px;
-  overflow-y: scroll;
-  border: 1px solid #ddd;
+/* Center container for layout */
+.container {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+  background: #ffffff; /* White background for container */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Title styling with color */
+.title {
+  font-size: 2.5rem;
+  color: #4A90E2; /* Bright blue color */
   margin-bottom: 20px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Soft text shadow */
 }
 
-#chat div {
-  margin: 5px 0;
-  padding: 5px;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-}
-
-/* Mic button styling */
+/* Mic button styling with hover effect */
 #micButton {
-  padding: 10px 20px;
-  background-color: #4CAF50;
+  padding: 15px 25px;
+  background-color: #4CAF50; /* Green */
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+
+#micButton:hover {
+  background-color: #45a049; /* Darker green */
 }
 
 #micButton.stop {
-  background-color: #f44336;
+  background-color: #f44336; /* Red for stop */
+}
+
+#micButton.stop:hover {
+  background-color: #d32f2f; /* Darker red */
 }
 
 /* Display the result of speech */
 #result {
-  width: 80%;
+  width: 90%;
   max-width: 600px;
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #ffffff; /* White box */
+  border: 2px solid #4A90E2; /* Blue border */
+  border-radius: 8px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  color: #333;
+  font-size: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Add hover effect for container (optional) */
+.container:hover {
+  transform: scale(1.02); /* Slight zoom on hover */
+  transition: transform 0.2s ease;
 }
 
